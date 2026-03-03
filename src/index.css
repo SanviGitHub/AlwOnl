@@ -1,0 +1,86 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700&family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap');
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", sans-serif;
+  --font-serif: "Cormorant Garamond", serif;
+  
+  --color-lofi-bg: #0c0c1d;
+  --color-lofi-purple: #a78bfa;
+  --color-lofi-cyan: #22d3ee;
+  --color-lofi-orange: #fb923c;
+  --color-lofi-pink: #f472b6;
+}
+
+@layer base {
+  body {
+    @apply bg-lofi-bg text-slate-200 font-sans selection:bg-lofi-purple/30;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .lofi-grain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0.08;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3ExternalLink %3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  .lofi-rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .rain-drop {
+    position: absolute;
+    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.1));
+    width: 1px;
+    height: 80px;
+    top: -100px;
+    animation: rain linear infinite;
+  }
+
+  @keyframes rain {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(120vh); }
+  }
+
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem];
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+
+  .neon-glow {
+    box-shadow: 0 0 20px rgba(167, 139, 250, 0.2);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-white/10 rounded-full hover:bg-white/20 transition-colors;
+}
